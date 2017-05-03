@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#5be1c1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+
+            <!--轮播图-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/id_first_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v4.view.ViewPager>
+
+                <LinearLayout
+                    android:id="@+id/id_first_rotate_point_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"/>
+
+            </FrameLayout>
+
+
+            <!--沈航要闻/shnews-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_shnews_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="沈航要闻"/>
+
+                    <TextView
+                        android:id="@+id/id_common_shnews_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/id_common_shnews_news_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="title"/>
+
+                <TextView
+                    android:id="@+id/id_common_shnews_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="content"/>
+
+                <ListView
+                    android:id="@+id/id_common_shnews_listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <!--通知平台/notice-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_notice_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="通知平台"/>
+
+                    <TextView
+                        android:id="@+id/id_common_notice_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/id_common_notice_news_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="title"/>
+
+                <TextView
+                    android:id="@+id/id_common_notice_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="content"/>
+
+                <ListView
+                    android:id="@+id/id_common_notice_listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <!--教学科研/teaching-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_teaching_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="教学科研"/>
+
+                    <TextView
+                        android:id="@+id/id_common_teaching_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ListView
+                        android:id="@+id/id_common_teaching_content_listView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--新闻动态/news-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_news_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="新闻动态"/>
+
+                    <TextView
+                        android:id="@+id/id_common_news_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <ListView
+                        android:id="@+id/id_common_news_content_listView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--媒体沈航/media-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_media_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="媒体沈航"/>
+
+                    <TextView
+                        android:id="@+id/id_common_media_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <ListView
+                    android:id="@+id/id_common_media_content_listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <!--ad_long-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <WebView
+                    android:id="@+id/id_common_ad_long01_webView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <WebView
+                    android:id="@+id/id_common_ad_long02_webView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <!--招生就业/hr-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_hr_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="招生就业"/>
+
+                    <TextView
+                        android:id="@+id/id_common_hr_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <WebView
+                        android:id="@+id/id_common_hr_content_webView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"/>
+
+                    <ListView
+                        android:id="@+id/id_common_hr_content_listView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--国际合作/international-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_international_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="国际合作"/>
+
+                    <TextView
+                        android:id="@+id/id_common_international_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <WebView
+                        android:id="@+id/id_common_international_content_webView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"/>
+
+                    <ListView
+                        android:id="@+id/id_common_international_content_listView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--沈航校报/SAUNewspaper-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_SAUNewspaper_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="沈航校报"/>
+
+                    <TextView
+                        android:id="@+id/id_common_SAUNewspaper_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <WebView
+                        android:id="@+id/id_common_SAUNewspaper_content_webView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"/>
+
+                    <ListView
+                        android:id="@+id/id_common_SAUNewspaper_content_listView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--学术信息/learning-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_learning_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="学术信息"/>
+
+                    <TextView
+                        android:id="@+id/id_common_learning_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <WebView
+                        android:id="@+id/id_common_learning_content_webView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"/>
+
+                    <ListView
+                        android:id="@+id/id_common_learning_content_listView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--菁菁校园/school-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_school_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="菁菁校园"/>
+
+                    <TextView
+                        android:id="@+id/id_common_school_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <WebView
+                        android:id="@+id/id_common_school_content_webView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"/>
+
+                    <ListView
+                        android:id="@+id/id_common_school_content_listView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--视频新闻/video-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_video_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="视频新闻"/>
+
+                    <TextView
+                        android:id="@+id/id_common_video_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <ListView
+                    android:id="@+id/id_common_video_content_listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <!--校友风采/alumna-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_alumna_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="校友风采"/>
+
+                    <TextView
+                        android:id="@+id/id_common_alumna_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <WebView
+                        android:id="@+id/id_common_alumna_content_webView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"/>
+
+                    <ListView
+                        android:id="@+id/id_common_alumna_content_listView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--沈航人物/figure-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_figure_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="沈航人物"/>
+
+                    <TextView
+                        android:id="@+id/id_common_figure_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <ListView
+                    android:id="@+id/id_common_figure_content_listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <!--高教视点/high-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ddd">
+
+                    <TextView
+                        android:id="@+id/id_common_high_title_left_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="高教视点"/>
+
+                    <TextView
+                        android:id="@+id/id_common_high_title_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:hint="更多内容"/>
+                </RelativeLayout>
+
+                <ListView
+                    android:id="@+id/id_common_high_content_listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <!--ad_long-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <WebView
+                    android:id="@+id/id_common_ad_long03_webView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

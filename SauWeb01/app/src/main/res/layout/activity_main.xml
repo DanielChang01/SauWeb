@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.danniel.danielchang.sauweb01.MainActivity">
+    android:background="#f6f6f6"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="#eb413d"
+        android:paddingBottom="12dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="12dp"
+        android:text="@string/app_name"
+        android:textColor="#ffffff"
+        android:textSize="18sp"/>
 
-</android.support.constraint.ConstraintLayout>
+    <com.astuetz.PagerSlidingTabStrip xmlns:tab="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fafafa"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textColor="#333333"
+        android:textSize="13sp"
+        tab:pstsDividerColor="@android:color/transparent"
+        tab:pstsIndicatorColor="#ed5955"
+        tab:pstsIndicatorHeight="2dp"
+        tab:pstsScrollOffset="0dp"
+        tab:pstsShouldExpand="true"
+        tab:pstsTabBackground="@android:color/transparent"
+        tab:pstsUnderlineColor="@android:color/transparent"/>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>
+

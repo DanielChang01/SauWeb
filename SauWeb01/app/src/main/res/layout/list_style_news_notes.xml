@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--用于显示新闻栏目的Title-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/id_notes_title_iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#04f9e0"/>
+
+        <TextView
+            android:id="@+id/id_notes_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="id_notes_title_tv"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/id_notes_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="id_notes_content"/>
+
+    <ListView
+        android:id="@+id/id_notes_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/id_notes_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:hint="more"/>
+
+</LinearLayout>

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/danielchang/git_repo/SauWeb/SauWeb01/tabstrip/src/main/shaders"/></dataSet><dataSet config="release"><source path="/Users/danielchang/git_repo/SauWeb/SauWeb01/tabstrip/src/release/shaders"/></dataSet></merger>
