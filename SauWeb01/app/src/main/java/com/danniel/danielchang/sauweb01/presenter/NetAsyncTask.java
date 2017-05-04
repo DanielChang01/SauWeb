@@ -78,6 +78,11 @@ public class NetAsyncTask extends AsyncTask {
             }
             ContentValues cv = new ContentValues();
             cv.put(DBOpenHelper.TB_PIC_ISTOP,1);
+            /**
+             * bug处理，添加表字段
+             * cv.put(DBOpenHelper.TB_PIC_FROM_URL,getCategory(el.attributes().get("src")));
+             */
+            cv.put(DBOpenHelper.TB_PIC_FROM_URL,getCategory(el.attributes().get("src")));
             cv.put(DBOpenHelper.TB_PIC_URL,el.attributes().get("src"));
             db.insert(DBOpenHelper.TBNAME_NEWS_PIC,null,cv);
         }

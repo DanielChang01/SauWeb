@@ -25,7 +25,7 @@ public class NewsListEntity {
     private String videoPage = "/video/";  //视频新闻
     private String figurePage = "/figure/"; //沈航人物
     private String newsPage = "/news/";   //新闻动态
-    private String internationalPage = "/international/";//国际合作
+    private String internationalPage = "/International/";//国际合作
     private String alumnaPage = "/alumna/"; //校友风采
     private String schoolPage = "/school/"; //菁菁校园
 

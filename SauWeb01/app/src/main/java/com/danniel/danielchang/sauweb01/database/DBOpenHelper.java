@@ -13,6 +13,10 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Modified by Daniel on 2017/4/15.
  * Modify_detail:
  * 1.change the struct of the definition of all tables
+ *
+ * Modified by Daniel on 2017/5/4
+ * Modify_detail:
+ * 1.change CREATE_TB_NEWS_PIC of field TB_PIC_FROM_URL,add attribute unique
  */
 
 public class DBOpenHelper extends SQLiteOpenHelper {
@@ -100,7 +104,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public static final String CREATE_TB_NEWS_PIC = "create table if not exists "+TBNAME_NEWS_PIC+" (" +
             TB_PIC_ID + " integer not null primary key autoincrement," +
             TB_PIC_FROM_URL + " varchar(50) default null," +
-            TB_PIC_URL + " varchar(50) default null," +
+            TB_PIC_URL + " varchar(50) unique," +
             TB_PIC_ISTOP + " integer default 0" +
             ");";
 

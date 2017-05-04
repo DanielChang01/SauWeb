@@ -1,9 +1,6 @@
 package com.danniel.danielchang.sauweb01.fragment;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -12,9 +9,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.StringBuilderPrinter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -45,6 +44,9 @@ import static android.os.Build.TIME;
  * modify_detail:
  * 1.add views and binding with ids
  * 2.get db cursor
+ * modified by Daniel at 2017/5/4
+ * modify_detail:
+ * 1.alter method of initADs, use StringBuilder for receiving the record in database
  */
 
 public class FirstFragment extends Fragment{
@@ -271,17 +273,31 @@ public class FirstFragment extends Fragment{
     }
 
     private void initADs(View view) {
-//        ad_long01_webView.loadUrl(newsListEntity);
         Cursor pic_Cursor = db.rawQuery("select * from " + DBOpenHelper.TBNAME_NEWS_PIC+" where "+
-                DBOpenHelper.TB_PIC_ISTOP+"=1 and "+DBOpenHelper.TB_PIC_FROM_URL+"=/uploads/",null);
-        String[] str = new String[]{};
-        int i = 0;
+                DBOpenHelper.TB_PIC_ISTOP+"=1 and "+DBOpenHelper.TB_PIC_FROM_URL+"=\"/uploads/\"",null);
+
+        StringBuilder sb = new StringBuilder();
         while (pic_Cursor.moveToNext()){
-            str[i++] = pic_Cursor.getString(pic_Cursor.getColumnIndex(DBOpenHelper.TB_PIC_URL));
+            sb.append(pic_Cursor.getString(pic_Cursor.getColumnIndex(DBOpenHelper.TB_PIC_URL))+";");
         }
-        ad_long01_webView.loadUrl(str[0]);
-        ad_long02_webView.loadUrl(str[1]);
-        ad_long03_webView.loadUrl(str[2]);
+        String[] str = sb.toString().split(";");
+
+        setImageFulfill(ad_long01_webView);
+        ad_long01_webView.loadUrl(newsListEntity.getBasePage()+str[0]);
+        setImageFulfill(ad_long02_webView);
+        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
+        setImageFulfill(ad_long03_webView);
+        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
+
+    }
+
+    /**
+     * 设置图片自适应界面，按照width填充
+     */
+    private void setImageFulfill(WebView webView) {
+        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
     }
 
     private void initBanner(View view) {
