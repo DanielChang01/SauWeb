@@ -381,6 +381,7 @@ public class FirstFragment extends Fragment{
                 first_pager_viewPager.setCurrentItem(++nowIndex);
                 if (isRotate) {
                     handler.postDelayed(rotateRunnable, TIME);
+//                    handler.postDelayed(rotateRunnable, 5000);
                 }
             }
         };
