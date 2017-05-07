@@ -1,6 +1,7 @@
 package com.danniel.danielchang.sauweb01.fragment;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.danniel.danielchang.sauweb01.ContentActivity;
 import com.danniel.danielchang.sauweb01.R;
 import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
 import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
@@ -282,12 +284,12 @@ public class FirstFragment extends Fragment{
         }
         String[] str = sb.toString().split(";");
 
-        setImageFulfill(ad_long01_webView);
-        ad_long01_webView.loadUrl(newsListEntity.getBasePage()+str[0]);
-        setImageFulfill(ad_long02_webView);
-        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
-        setImageFulfill(ad_long03_webView);
-        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
+//        setImageFulfill(ad_long01_webView);
+//        ad_long01_webView.loadUrl(newsListEntity.getBasePage()+str[0]);
+//        setImageFulfill(ad_long02_webView);
+//        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
+//        setImageFulfill(ad_long03_webView);
+//        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
 
     }
 
@@ -622,6 +624,7 @@ public class FirstFragment extends Fragment{
     }
 
     private void initShnewsData(Cursor cursor, String category, ListView listView) {
+
         final List<Map<String,String>> list = getListDate(cursor,category);
         SimpleAdapter adapter = new SimpleAdapter(view.getContext(),list,R.layout.list_style_simple_news,
                 new String[]{DBOpenHelper.TB_NEWS_TITLE},new int[]{R.id.id_simple_list_style_textView});
@@ -629,7 +632,14 @@ public class FirstFragment extends Fragment{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+//                TextView tv_news_title = (TextView) view.findViewById(R.id.id_simple_list_style_textView);
+                Map<String,String> myMap = list.get(position);
+                String myUrl = myMap.get(DBOpenHelper.TB_NEWS_URL);
+                Intent intent = new Intent(view.getContext(), ContentActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(DBOpenHelper.TB_NEWS_URL,myUrl);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
