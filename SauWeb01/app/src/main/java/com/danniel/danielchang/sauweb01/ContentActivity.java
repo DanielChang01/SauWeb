@@ -1,6 +1,7 @@
 package com.danniel.danielchang.sauweb01;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
+
 /**
  * Created by Daniel on 2017/4/29.
  */
@@ -19,6 +22,7 @@ import android.webkit.WebViewClient;
 public class ContentActivity extends Activity {
 
     WebView webView;
+    String myUrl = null;
     String js_Function = "function getClass(parent,sClass)\n" +
             "{\n" +
             "    var aEle=parent.getElementsByTagName('div');\n" +
@@ -49,6 +53,10 @@ public class ContentActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
         webView = (WebView) findViewById(R.id.content_WebView);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        myUrl = bundle.getString(DBOpenHelper.TB_NEWS_URL);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -83,6 +91,8 @@ public class ContentActivity extends Activity {
                 super.onReceivedSslError(view, handler, error);
             }
         });
+
+        webView.loadUrl(myUrl);
 
 
 

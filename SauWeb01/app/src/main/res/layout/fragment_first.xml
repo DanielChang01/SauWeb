@@ -63,7 +63,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <TextView
@@ -111,7 +111,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <TextView
@@ -161,7 +161,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -208,7 +208,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -255,7 +255,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <ListView
@@ -312,7 +312,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -366,7 +366,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -420,7 +420,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -474,7 +474,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -528,7 +528,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -581,7 +581,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <ListView
@@ -619,7 +619,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -672,7 +672,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <ListView
@@ -709,7 +709,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_alignParentRight="true"
                         android:clickable="true"
-                        android:hint="更多内容"/>
+                        android:hint=""/>
                 </RelativeLayout>
 
                 <ListView
