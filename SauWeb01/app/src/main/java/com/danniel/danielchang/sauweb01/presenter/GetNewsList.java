@@ -3,8 +3,10 @@ package com.danniel.danielchang.sauweb01.presenter;
 
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.danniel.danielchang.sauweb01.ContentActivity;
 import com.danniel.danielchang.sauweb01.R;
 import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
 import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
@@ -62,14 +65,15 @@ public class GetNewsList {
             }
 
             private void initData() {
-                SimpleAdapter adapter = new SimpleAdapter(view.getContext(),getData()
+                final List<Map<String,String>> myList = getData();
+                SimpleAdapter adapter = new SimpleAdapter(view.getContext(),myList
                         , R.layout.list_style_simple_news,new String[]{DBOpenHelper.TB_NEWS_TITLE}
                         ,new int[]{R.id.id_simple_list_style_textView});
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                        getNewsShown(myList,view,position);
                     }
                 });
             }
@@ -89,6 +93,16 @@ public class GetNewsList {
                 }
 
                 return my_list;
+            }
+
+            private void getNewsShown(List<Map<String, String>> list, View view, int position) {
+                Map<String,String> myMap = list.get(position);
+                String myUrl = myMap.get(DBOpenHelper.TB_NEWS_URL);
+                Intent intent = new Intent(view.getContext(), ContentActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(DBOpenHelper.TB_NEWS_URL,myUrl);
+                intent.putExtras(bundle);
+                view.getContext().startActivity(intent);
             }
         };
 

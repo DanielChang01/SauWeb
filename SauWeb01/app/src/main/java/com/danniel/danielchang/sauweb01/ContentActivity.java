@@ -65,9 +65,10 @@ public class ContentActivity extends Activity {
 
 
         WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setSupportZoom(true);
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setJavaScriptEnabled(true); //支持js
+        webSettings.setSupportZoom(true); //支持缩放
+        webSettings.setPluginState(WebSettings.PluginState.ON);//对任何对象都会加载一个（可能不存在的）插件来处理内容
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);//支持内容重新布局
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
 
@@ -85,15 +86,16 @@ public class ContentActivity extends Activity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                if(url!=null&&url.contains("http")) {
+//                super.onPageFinished(view, url);
+//                if(url!=null&&url.contains("http")) {
+//
+//                    view.loadUrl(js_Function);
+//
+//                    view.loadUrl(js_FunctionHide);
+//
+//                    view.loadUrl("javascript:hideOther();");
+//                }
 
-                    view.loadUrl(js_Function);
-
-                    view.loadUrl(js_FunctionHide);
-
-                    view.loadUrl("javascript:hideOther();");
-                }
-                super.onPageFinished(view, url);
             }
 
             @Override
