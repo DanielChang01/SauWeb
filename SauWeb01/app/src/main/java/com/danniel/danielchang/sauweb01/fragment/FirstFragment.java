@@ -460,6 +460,7 @@ public class FirstFragment extends Fragment{
 //                Intent intent = new Intent(NewsList.this,NewsContent.class);
 //                intent.putExtras(bundle);
 //                startActivity(intent);
+                getNewsShown(list,view,position);
             }
         });
     }
@@ -472,7 +473,7 @@ public class FirstFragment extends Fragment{
         alumna_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
     }
@@ -485,7 +486,7 @@ public class FirstFragment extends Fragment{
         international_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
     }
@@ -498,7 +499,7 @@ public class FirstFragment extends Fragment{
         news_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
     }
@@ -511,7 +512,7 @@ public class FirstFragment extends Fragment{
         figure_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
     }
@@ -524,7 +525,7 @@ public class FirstFragment extends Fragment{
         video_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
 
@@ -538,7 +539,7 @@ public class FirstFragment extends Fragment{
         sauNewspaper_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
     }
@@ -551,7 +552,7 @@ public class FirstFragment extends Fragment{
         media_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
 
@@ -565,7 +566,7 @@ public class FirstFragment extends Fragment{
         hr_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
     }
@@ -578,7 +579,7 @@ public class FirstFragment extends Fragment{
         high_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
     }
@@ -591,7 +592,7 @@ public class FirstFragment extends Fragment{
         learning_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
     }
@@ -604,7 +605,7 @@ public class FirstFragment extends Fragment{
         teaching_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
 
@@ -618,7 +619,7 @@ public class FirstFragment extends Fragment{
         notice_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getNewsShown(list,view,position);
             }
         });
     }
@@ -633,15 +634,23 @@ public class FirstFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                TextView tv_news_title = (TextView) view.findViewById(R.id.id_simple_list_style_textView);
-                Map<String,String> myMap = list.get(position);
-                String myUrl = myMap.get(DBOpenHelper.TB_NEWS_URL);
-                Intent intent = new Intent(view.getContext(), ContentActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString(DBOpenHelper.TB_NEWS_URL,myUrl);
-                intent.putExtras(bundle);
-                startActivity(intent);
+
+                getNewsShown(list,view,position);
+
             }
+
+
         });
+    }
+
+    private void getNewsShown(List<Map<String, String>> list, View view, int position) {
+        Map<String,String> myMap = list.get(position);
+        String myUrl = myMap.get(DBOpenHelper.TB_NEWS_URL);
+        Intent intent = new Intent(view.getContext(), ContentActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(DBOpenHelper.TB_NEWS_URL,myUrl);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private List<Map<String, String>> getListDate(Cursor cursor, String category) {

@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
+import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
 
 /**
  * Created by Daniel on 2017/4/29.
@@ -23,6 +24,7 @@ public class ContentActivity extends Activity {
 
     WebView webView;
     String myUrl = null;
+    NewsListEntity newsListEntity = null;
     String js_Function = "function getClass(parent,sClass)\n" +
             "{\n" +
             "    var aEle=parent.getElementsByTagName('div');\n" +
@@ -37,15 +39,17 @@ public class ContentActivity extends Activity {
             "    return aResult;\n" +
             "}";
 
+//    String js_FunctionHide = "function hideOther() \n" +
+//            "{\n" +
+//            "    getClass(document,'sid-left')[0].style.display='none';\n" +
+//            "    document.getElementById('mainNav').style.display='none';\n" +
+//            "    document.getElementById('header').style.display='none';\n" +
+//            "    document.getElementById('footer').style.display='none';\n" +
+//            "}";
+
     String js_FunctionHide = "function hideOther() \n" +
             "{\n" +
-            "    getClass(document,'logo')[0].style.display='none';\n" +
-            "    getClass(document,'topNav')[0].style.display='none';\n" +
-            "    getClass(document,'topSearch')[0].style.display='none';\n" +
             "    getClass(document,'sid-left')[0].style.display='none';\n" +
-            "    document.getElementById('mainNav').style.display='none';\n" +
-            "    document.getElementById('top_nav').style.display='none';\n" +
-            "    document.getElementById('footer').style.display='none';\n" +
             "}";
 
     @Override
@@ -53,13 +57,19 @@ public class ContentActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
         webView = (WebView) findViewById(R.id.content_WebView);
+        newsListEntity = new NewsListEntity();
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        myUrl = bundle.getString(DBOpenHelper.TB_NEWS_URL);
+        myUrl = newsListEntity.getBasePage()+bundle.getString(DBOpenHelper.TB_NEWS_URL);
+
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
 
 
         webView.setWebViewClient(new WebViewClient(){
