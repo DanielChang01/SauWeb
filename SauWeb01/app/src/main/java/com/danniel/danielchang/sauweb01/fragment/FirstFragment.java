@@ -284,12 +284,12 @@ public class FirstFragment extends Fragment{
         }
         String[] str = sb.toString().split(";");
 
-//        setImageFulfill(ad_long01_webView);
-//        ad_long01_webView.loadUrl(newsListEntity.getBasePage()+str[0]);
-//        setImageFulfill(ad_long02_webView);
-//        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
-//        setImageFulfill(ad_long03_webView);
-//        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
+        setImageFulfill(ad_long01_webView);
+        ad_long01_webView.loadUrl(newsListEntity.getBasePage()+str[0]);
+        setImageFulfill(ad_long02_webView);
+        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
+        setImageFulfill(ad_long03_webView);
+        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
 
     }
 

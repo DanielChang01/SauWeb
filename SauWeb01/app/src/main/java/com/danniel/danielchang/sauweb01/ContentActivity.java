@@ -7,7 +7,9 @@ import android.net.http.SslError;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -105,6 +107,10 @@ public class ContentActivity extends Activity {
         });
 
         webView.loadUrl(myUrl);
+
+        webView.setWebChromeClient(new WebChromeClient(){
+
+        });
 
 
 
