@@ -41,18 +41,15 @@ public class ContentActivity extends Activity {
             "    return aResult;\n" +
             "}";
 
-//    String js_FunctionHide = "function hideOther() \n" +
-//            "{\n" +
-//            "    getClass(document,'sid-left')[0].style.display='none';\n" +
-//            "    document.getElementById('mainNav').style.display='none';\n" +
-//            "    document.getElementById('header').style.display='none';\n" +
-//            "    document.getElementById('footer').style.display='none';\n" +
-//            "}";
-
     String js_FunctionHide = "function hideOther() \n" +
             "{\n" +
             "    getClass(document,'sid-left')[0].style.display='none';\n" +
+            "    document.getElementById('mainNav').style.display='none';\n" +
+            "    document.getElementById('header').style.display='none';\n" +
+            "    document.getElementById('footer').style.display='none';\n" +
             "}";
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,7 +63,7 @@ public class ContentActivity extends Activity {
         myUrl = newsListEntity.getBasePage()+bundle.getString(DBOpenHelper.TB_NEWS_URL);
 
 
-        WebSettings webSettings = webView.getSettings();
+        final WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true); //支持js
         webSettings.setSupportZoom(true); //支持缩放
         webSettings.setPluginState(WebSettings.PluginState.ON);//对任何对象都会加载一个（可能不存在的）插件来处理内容
@@ -88,15 +85,16 @@ public class ContentActivity extends Activity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-//                super.onPageFinished(view, url);
-//                if(url!=null&&url.contains("http")) {
-//
-//                    view.loadUrl(js_Function);
-//
-//                    view.loadUrl(js_FunctionHide);
-//
-//                    view.loadUrl("javascript:hideOther();");
-//                }
+                webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+                super.onPageFinished(view, url);
+                if(url!=null&&url.contains("http")) {
+
+                    view.loadUrl(js_Function);
+
+                    view.loadUrl(js_FunctionHide);
+
+                    view.loadUrl("javascript:hideOther();");
+                }
 
             }
 
