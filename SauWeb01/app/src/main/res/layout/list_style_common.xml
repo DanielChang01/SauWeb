@@ -34,9 +34,9 @@
         <WebView
             android:id="@+id/id_common_content_webView"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1" />
 
         <ListView
             android:id="@+id/id_common_content_listView"

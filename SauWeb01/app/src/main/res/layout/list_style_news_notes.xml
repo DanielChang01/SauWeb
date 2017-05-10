@@ -13,7 +13,7 @@
             android:id="@+id/id_notes_title_iv_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#04f9e0"/>
+            android:background="#C7EDCC"/>
 
         <TextView
             android:id="@+id/id_notes_title_tv"
@@ -30,6 +30,7 @@
 
     <ListView
         android:id="@+id/id_notes_list"
+        style="@style/listStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
