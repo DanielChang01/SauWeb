@@ -17,6 +17,10 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Modified by Daniel on 2017/5/4
  * Modify_detail:
  * 1.change CREATE_TB_NEWS_PIC of field TB_PIC_FROM_URL,add attribute unique
+ *
+ * Modified bt Daniel on 2017/5/13
+ * Modify_detail:
+ * 1.change table tb_news_content for adding a column content_note to note the sub_content of news
  */
 
 public class DBOpenHelper extends SQLiteOpenHelper {
@@ -47,6 +51,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
      */
     public static final String TB_CONTENT_ID = "content_id";
     public static final String TB_CONTENT_URL = "content_url";
+    public static final String TB_CONTENT_NOTE = "content_note";
     public static final String TB_CONTENT_TEXT = "content_text";
 
 
@@ -85,11 +90,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
      * 新闻内容表
      * content_id
      * content_url 新闻路径，用于唯一标识新闻
+     * content_note 用于显示新闻头信息
      * content_text
      */
     public static final String CREATE_TB_NEWS_CONTENT = "create table if not exists "+TBNAME_NEWS_CONTENT+" (" +
             TB_CONTENT_ID + " integer not null primary key autoincrement," +
             TB_CONTENT_URL + " varchar(50) unique," +
+            TB_CONTENT_NOTE + " varchar(100) default null," +
             TB_CONTENT_TEXT + " text default null" +
             ");";
 
