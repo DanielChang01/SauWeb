@@ -5,5 +5,5 @@ package com.danniel.danielchang.sauweb01.presenter;
  */
 
 public class GetNewsContent {
-    
+
 }

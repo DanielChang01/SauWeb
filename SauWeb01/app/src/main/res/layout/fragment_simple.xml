@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#C7EDCC">
 
-    <ListView
+    <com.danniel.danielchang.sauweb01.presenter.LoadListView
         android:id="@+id/id_simple_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

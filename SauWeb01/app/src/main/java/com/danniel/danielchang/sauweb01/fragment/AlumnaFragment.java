@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.danniel.danielchang.sauweb01.R;
 import com.danniel.danielchang.sauweb01.presenter.GetNewsList;
+import com.danniel.danielchang.sauweb01.presenter.LoadListView;
 
 
 /**
@@ -25,13 +26,13 @@ public class AlumnaFragment extends Fragment {
     public static String news_category = "/alumna/";
 
     View view;
-    private ListView listView;
+    private LoadListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_simple,container,false);
 
-        listView = (ListView) view.findViewById(R.id.id_simple_listView);
+        listView = (LoadListView) view.findViewById(R.id.id_simple_listView);
         new GetNewsList(view,net_url,news_category,listView);
 
         return view;
