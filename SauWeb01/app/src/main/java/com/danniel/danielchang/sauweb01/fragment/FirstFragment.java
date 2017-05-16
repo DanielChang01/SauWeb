@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.StringBuilderPrinter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +21,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.danniel.danielchang.sauweb01.ContentActivity;
+import com.danniel.danielchang.sauweb01.ContentActivityJS;
 import com.danniel.danielchang.sauweb01.R;
 import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
 import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
@@ -646,7 +644,7 @@ public class FirstFragment extends Fragment{
     private void getNewsShown(List<Map<String, String>> list, View view, int position) {
         Map<String,String> myMap = list.get(position);
         String myUrl = myMap.get(DBOpenHelper.TB_NEWS_URL);
-        Intent intent = new Intent(view.getContext(), ContentActivity.class);
+        Intent intent = new Intent(view.getContext(), ContentActivityJS.class);
         Bundle bundle = new Bundle();
         bundle.putString(DBOpenHelper.TB_NEWS_URL,myUrl);
         intent.putExtras(bundle);

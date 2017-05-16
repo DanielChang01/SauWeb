@@ -17,6 +17,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.danniel.danielchang.sauweb01.ContentActivity;
+import com.danniel.danielchang.sauweb01.ContentActivityJS;
 import com.danniel.danielchang.sauweb01.R;
 import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
 import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
@@ -33,6 +34,9 @@ import java.util.Map;
 
 /**
  * Created by Daniel on 2017/4/15.
+ * Modified by Daniel on 2017/5/17
+ * modify_detail:
+ * changed the intent target :ContentActivity.class
  */
 
 public class GetNewsList {

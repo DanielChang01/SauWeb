@@ -2,116 +2,72 @@ package com.danniel.danielchang.sauweb01;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.http.SslError;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.view.View;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
+import com.danniel.danielchang.sauweb01.entities.NewsEntity;
 import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
+import com.danniel.danielchang.sauweb01.presenter.GetNewsContent;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.util.concurrent.ExecutionException;
 
 /**
- * Created by Daniel on 2017/4/29.
+ * Created by danielchang on 2017/5/17.
  */
 
 public class ContentActivity extends Activity {
 
-    WebView webView;
     String myUrl = null;
+    String myCategory = null;
     NewsListEntity newsListEntity = null;
-    String js_Function = "function getClass(parent,sClass)\n" +
-            "{\n" +
-            "    var aEle=parent.getElementsByTagName('div');\n" +
-            "    var aResult=[];\n" +
-            "    var i=0;\n" +
-            "    for(i<0; i<aEle.length; i++) {\n" +
-            "        if(aEle[i].className==sClass)\n" +
-            "        {\n" +
-            "            aResult.push(aEle[i]);\n" +
-            "        }\n" +
-            "    };\n" +
-            "    return aResult;\n" +
-            "}";
+    NewsEntity newsEntity;
 
-    String js_FunctionHide = "function hideOther() \n" +
-            "{\n" +
-            "    getClass(document,'sid-left')[0].style.display='none';\n" +
-            "    document.getElementById('mainNav').style.display='none';\n" +
-            "    document.getElementById('header').style.display='none';\n" +
-            "    document.getElementById('footer').style.display='none';\n" +
-            "}";
-
-
+    TextView myTitle;
+    TextView myNote;
+    TextView myContent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_content);
-        webView = (WebView) findViewById(R.id.content_WebView);
+        setContentView(R.layout.activity_content_for_pure_text);
+
         newsListEntity = new NewsListEntity();
+        myTitle = (TextView) findViewById(R.id.id_pure_text_title);
+        myNote = (TextView) findViewById(R.id.id_pure_text_title_note);
+        myContent = (TextView) findViewById(R.id.id_pure_text_content);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        myUrl = newsListEntity.getBasePage()+bundle.getString(DBOpenHelper.TB_NEWS_URL);
+        myCategory = bundle.getString(DBOpenHelper.TB_NEWS_URL);
+        myUrl = newsListEntity.getBasePage()+myCategory;
 
 
-        final WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true); //支持js
-        webSettings.setSupportZoom(true); //支持缩放
-        webSettings.setPluginState(WebSettings.PluginState.ON);//对任何对象都会加载一个（可能不存在的）插件来处理内容
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);//支持内容重新布局
-        webSettings.setUseWideViewPort(true);
-        webSettings.setLoadWithOverviewMode(true);
-
-
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                return super.shouldOverrideUrlLoading(view, request);
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-                super.onPageFinished(view, url);
-                if(url!=null&&url.contains("http")) {
-
-                    view.loadUrl(js_Function);
-
-                    view.loadUrl(js_FunctionHide);
-
-                    view.loadUrl("javascript:hideOther();");
-                }
-
-            }
-
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                super.onReceivedSslError(view, handler, error);
-            }
-        });
-
-        webView.loadUrl(myUrl);
-
-        webView.setWebChromeClient(new WebChromeClient(){
-
-        });
-
+        try {
+            //获取异步线程的返回类型
+            newsEntity = (NewsEntity) new GetNewsContent().execute(myCategory,myUrl).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        if (newsEntity != null){
+            showNewsContent(newsEntity);
+        }
 
 
     }
-}
 
+    private void showNewsContent(NewsEntity newsEntity) {
+        myTitle.setText(newsEntity.getNews_Title());
+        myNote.setText(newsEntity.getNews_Note());
+        myContent.setText(newsEntity.getNews_Part_One());
+    }
+
+
+}

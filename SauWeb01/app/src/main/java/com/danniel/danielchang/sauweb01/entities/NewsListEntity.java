@@ -30,6 +30,9 @@ public class NewsListEntity {
     private String schoolPage = "/school/"; //菁菁校园
 
     private String pageListBaseNum = "list_";
+    private String newsTitleContent = ".title h1";  //新闻标题
+    private String newsTitleNote = ".note"; //新闻信息栏
+    private String newsRealContent = ".content"; //新闻内容
 
     /**
      * 导航栏图标
@@ -257,6 +260,18 @@ public class NewsListEntity {
 
     public String getPageListBaseNum() {
         return pageListBaseNum;
+    }
+
+    public String getNewsTitleContent() {
+        return newsTitleContent;
+    }
+
+    public String getNewsTitleNote() {
+        return newsTitleNote;
+    }
+
+    public String getNewsRealContent() {
+        return newsRealContent;
     }
 }
 
