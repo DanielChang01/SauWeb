@@ -29,6 +29,8 @@ public class NewsListEntity {
     private String alumnaPage = "/alumna/"; //校友风采
     private String schoolPage = "/school/"; //菁菁校园
 
+    private String pageListBaseNum = "list_";
+
     /**
      * 导航栏图标
      */
@@ -72,7 +74,6 @@ public class NewsListEntity {
      */
     private String getIDlist_li_a = ".iDlistA li a";
 
-
     /**
      * 试用范围
      * figure
@@ -102,12 +103,20 @@ public class NewsListEntity {
      * 普通新闻页面的列表获取
      */
     private String getCommonNewsList = ".NewList li a";
+    /**
+     * 普通新闻页的椰页数加载
+     */
+    private String getPageList = ".pagelist li";
 
     private String getNewsPic = ".pic a";
     private String getAdLong = ".ad_long img";
 
     public String getGetList_li() {
         return getList_li;
+    }
+
+    public String getGetPageList() {
+        return getPageList;
     }
 
     public String getGetIFigureTitle() {
@@ -244,6 +253,10 @@ public class NewsListEntity {
 
     public String getInternational_note_pic() {
         return international_note_pic;
+    }
+
+    public String getPageListBaseNum() {
+        return pageListBaseNum;
     }
 }
 

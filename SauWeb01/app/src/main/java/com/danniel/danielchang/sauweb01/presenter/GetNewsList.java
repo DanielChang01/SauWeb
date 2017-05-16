@@ -67,8 +67,8 @@ public class GetNewsList {
             private void initData() {
                 final List<Map<String,String>> myList = getData();
                 SimpleAdapter adapter = new SimpleAdapter(view.getContext(),myList
-                        , R.layout.list_style_simple_news,new String[]{DBOpenHelper.TB_NEWS_TITLE}
-                        ,new int[]{R.id.id_simple_list_style_textView});
+                        , R.layout.list_style_simple_news_for_common,new String[]{DBOpenHelper.TB_NEWS_TITLE}
+                        ,new int[]{R.id.id_simple_list_style_textView_for_common});
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

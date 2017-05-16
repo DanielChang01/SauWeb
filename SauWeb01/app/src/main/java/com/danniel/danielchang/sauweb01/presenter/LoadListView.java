@@ -79,7 +79,7 @@ public class LoadListView extends ListView implements AbsListView.OnScrollListen
     //加载完成
     public void loadComplete(){
         isLoading = false;
-        footer.findViewById(R.id.id_list_bottom_progress_linear).setVisibility(View.VISIBLE);
+        footer.findViewById(R.id.id_list_bottom_progress_linear).setVisibility(View.GONE);
     }
 
     //加载更多数据的回调接口
