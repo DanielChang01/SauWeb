@@ -48,6 +48,7 @@ public class GetNewsContent extends AsyncTask{
     }
 
     private void getNewsHandled(Document doc, String news_category) {
+        String str_Category = getCategory(news_category);
 
         Elements els_Title = doc.select(newsListEntity.getNewsTitleContent());
         for (Element el : els_Title){
@@ -57,10 +58,47 @@ public class GetNewsContent extends AsyncTask{
         for (Element el : els_Note){
             newsEntity.setNews_Note(el.text());
         }
-        Elements els_Content = doc.select(newsListEntity.getNewsRealContent());
-        for (Element el : els_Content){
-            newsEntity.setNews_Part_One(el.text());
+        Elements els_Content = null;
+        if (str_Category.trim().equals(newsListEntity.getVideoPage())){
+            els_Content = doc.select(newsListEntity.getGetVideoContent());
+            for (Element el : els_Content){
+                newsEntity.setNews_Part_One(newsListEntity.getBasePage()+el.attributes().get("src")+" " +
+                        "\n\n"+"提示：我们的视频需要强大的插件，请移至强大的PC端观看！！");
+            }
+        } else if (str_Category.trim().equals(newsListEntity.getSAUNewspaperPage())){
+            els_Content = doc.select(newsListEntity.getGetNewsPaperContent());
+            for (Element el : els_Content){
+                newsEntity.setNews_Part_One(newsListEntity.getBasePage()+el.attributes().get("href"));
+            }
         }
+
+        else {
+            els_Content = doc.select(newsListEntity.getNewsRealContent());
+            for (Element el : els_Content){
+                newsEntity.setNews_Part_One(handleContent(el.text()));
+            }
+        }
+    }
+
+    private String handleContent(String content) {
+        StringBuilder sb = new StringBuilder();
+        String[] strs = content.split(" ");
+        for (int i = 0; i < strs.length; i ++){
+            /**
+             * 用于去除简单空格所带来的排版问题
+             */
+            if (strs[i].length()<10){
+                sb.append(strs[i]);
+            } else {
+                sb.append(strs[i] + "\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    private String getCategory(String myCategory) {
+        String[] strs = myCategory.trim().split("/");
+        return "/"+strs[1]+"/";
     }
 
 

@@ -31,6 +31,7 @@ public class ContentActivity extends Activity {
     TextView myTitle;
     TextView myNote;
     TextView myContent;
+    WebView myWebView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,12 +42,14 @@ public class ContentActivity extends Activity {
         myTitle = (TextView) findViewById(R.id.id_pure_text_title);
         myNote = (TextView) findViewById(R.id.id_pure_text_title_note);
         myContent = (TextView) findViewById(R.id.id_pure_text_content);
+        myWebView = (WebView) findViewById(R.id.id_pure_text_webView);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         myCategory = bundle.getString(DBOpenHelper.TB_NEWS_URL);
         myUrl = newsListEntity.getBasePage()+myCategory;
 
+        String str_Category = getCategory(myCategory);
 
         try {
             //获取异步线程的返回类型
@@ -57,16 +60,28 @@ public class ContentActivity extends Activity {
             e.printStackTrace();
         }
         if (newsEntity != null){
-            showNewsContent(newsEntity);
+            showNewsContent(newsEntity,str_Category);
         }
-
 
     }
 
-    private void showNewsContent(NewsEntity newsEntity) {
+
+    private void showNewsContent(NewsEntity newsEntity,String category) {
         myTitle.setText(newsEntity.getNews_Title());
         myNote.setText(newsEntity.getNews_Note());
-        myContent.setText(newsEntity.getNews_Part_One());
+
+        if (category.equals(newsListEntity.getSAUNewspaperPage())){
+            String str = newsEntity.getNews_Part_One();
+            myContent.setText(newsEntity.getNews_Part_One());
+            myWebView.loadUrl(newsEntity.getNews_Part_One());
+        } else {
+            myContent.setText(newsEntity.getNews_Part_One());
+        }
+    }
+
+    private String getCategory(String myCategory) {
+        String[] strs = myCategory.trim().split("/");
+        return "/"+strs[1]+"/";
     }
 
 

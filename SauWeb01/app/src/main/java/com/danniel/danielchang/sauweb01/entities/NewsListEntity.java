@@ -66,6 +66,8 @@ public class NewsListEntity {
      * video
      */
     private String getList_li = ".list li a";
+    private String getVideoContent = ".content object embed";
+    private String getNewsPaperContent = ".content a";
 
     /**
      * 试用范围
@@ -99,7 +101,7 @@ public class NewsListEntity {
      * 试用范围
      * figure
      */
-    private String getUpdateFigure = ".iFigure li";
+    private String getUpdateFigure = ".iFigure li a";
     private String getUpdateHeadline = ".info a";
 
     /**
@@ -272,6 +274,14 @@ public class NewsListEntity {
 
     public String getNewsRealContent() {
         return newsRealContent;
+    }
+
+    public String getGetVideoContent() {
+        return getVideoContent;
+    }
+
+    public String getGetNewsPaperContent() {
+        return getNewsPaperContent;
     }
 }
 

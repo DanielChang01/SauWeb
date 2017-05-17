@@ -46,7 +46,7 @@ public class NetAsyncTask extends AsyncTask {
         getNews_List_li(doc,newsListEntity.getGetHeadlines()); //".Headlines h2 a"
         getNews_List_li(doc,newsListEntity.getGetIElist_li_a()); //".iElist li a"
 
-        setUpdateNews(doc,newsListEntity.getGetUpdateFigure());  //".iFigure li"
+        setUpdateNews(doc,newsListEntity.getGetUpdateFigure());  //".iFigure li a"
         setUpdateNews(doc,newsListEntity.getGetUpdateHeadline());//".info a"
 
         getNewsPic(doc,newsListEntity.getGetNewsPic());
@@ -60,12 +60,17 @@ public class NetAsyncTask extends AsyncTask {
     private void getNewsPic(Document doc, String getNewsPic) {
         Elements els = doc.select(getNewsPic);
         for (Element el : els) {
-            if (el.select("img").size() > 1) {
-                continue;
-            }
+//            if (el.select("img").size() > 1) {
+//                continue;
+//            }
+//            String erl = el.getElementsByTag("img").get(0).attr("src");
+//            String url = el.attributes().get("href");
             ContentValues cv = new ContentValues();
             cv.put(DBOpenHelper.TB_PIC_ISTOP,1);
-            cv.put(DBOpenHelper.TB_PIC_URL,el.attributes().get("src"));
+//            String str = el.attributes().get("href");
+            cv.put(DBOpenHelper.TB_PIC_URL,el.getElementsByTag("img").get(0).attr("src"));
+//            cv.put(DBOpenHelper.TB_PIC_FROM_URL,el.attributes().get("href"));
+            cv.put(DBOpenHelper.TB_PIC_FROM_URL,el.attributes().get("href"));
             db.insert(DBOpenHelper.TBNAME_NEWS_PIC,null,cv);
         }
     }
@@ -100,7 +105,7 @@ public class NetAsyncTask extends AsyncTask {
                 continue;
             }
             ContentValues cv = new ContentValues();
-            cv.put(DBOpenHelper.TB_NEWS_DESCRIBE,el.text());
+                cv.put(DBOpenHelper.TB_NEWS_DESCRIBE,el.text());
             db.update(DBOpenHelper.TBNAME_NEWS,cv,DBOpenHelper.TB_NEWS_URL+"=?"
                     ,new String[]{el.attributes().get("href")});
         }

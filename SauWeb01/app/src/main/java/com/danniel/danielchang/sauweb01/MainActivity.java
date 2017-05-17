@@ -44,9 +44,15 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        helper = new DBOpenHelper(this);
+        db = helper.getWritableDatabase();
+
 
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tab);
         ViewPager viewPager = (ViewPager) findViewById(R.id.main_viewpager);
+
+//        NewsListEntity netList = new NewsListEntity();
+//        new NetAsyncTask().execute(netList.getBasePage(),MainActivity.this);
 
 
         Fragment[] fragments = {new FirstFragment(),new SHNewsFragment(), new NoticeFragment(), new TeachingFragment(),
@@ -60,12 +66,6 @@ public class MainActivity extends FragmentActivity {
         viewPager.setAdapter(adapter);
         tabStrip.setViewPager(viewPager);
 
-        helper = new DBOpenHelper(this);
-        db = helper.getWritableDatabase();
-
-
-        NewsListEntity netList = new NewsListEntity();
-        new NetAsyncTask().execute(netList.getBasePage(),MainActivity.this);
 
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);

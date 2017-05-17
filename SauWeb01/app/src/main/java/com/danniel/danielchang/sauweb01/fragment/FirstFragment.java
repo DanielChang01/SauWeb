@@ -21,7 +21,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.danniel.danielchang.sauweb01.ContentActivityJS;
+import com.danniel.danielchang.sauweb01.ContentActivity;
 import com.danniel.danielchang.sauweb01.R;
 import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
 import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
@@ -30,6 +30,7 @@ import com.danniel.danielchang.sauweb01.presenter.RotateVpAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +56,7 @@ public class FirstFragment extends Fragment{
     DBOpenHelper helper;
     SQLiteDatabase db;
     Cursor cursor;
+    Cursor cursor_pic;
     private String str_news_url = new NewsListEntity().getBasePage();
     private String str_news_category = new NewsListEntity().getFisrtPage();
 
@@ -160,15 +162,20 @@ public class FirstFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first,container,false);
 
+
         initView(view);
         initNewsCursor(view);
         initBanner(view);
         initADs(view);
-        initMoreUrl(view);
-
+//        initMoreUrl(view);
         return view;
     }
 
+    /**
+     * not use
+     * @param view
+     */
+    /*
     private void initMoreUrl(View view) {
         //1.沈航新闻
         tv_shnews_title_more.setOnClickListener(new View.OnClickListener() {
@@ -269,8 +276,8 @@ public class FirstFragment extends Fragment{
             }
         });
 
-
     }
+    */
 
     private void initADs(View view) {
         Cursor pic_Cursor = db.rawQuery("select * from " + DBOpenHelper.TBNAME_NEWS_PIC+" where "+
@@ -284,10 +291,10 @@ public class FirstFragment extends Fragment{
 
         setImageFulfill(ad_long01_webView);
         ad_long01_webView.loadUrl(newsListEntity.getBasePage()+str[0]);
-//        setImageFulfill(ad_long02_webView);
-//        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
-//        setImageFulfill(ad_long03_webView);
-//        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
+        setImageFulfill(ad_long02_webView);
+        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
+        setImageFulfill(ad_long03_webView);
+        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
 
     }
 
@@ -380,8 +387,8 @@ public class FirstFragment extends Fragment{
                 int nowIndex = first_pager_viewPager.getCurrentItem();
                 first_pager_viewPager.setCurrentItem(++nowIndex);
                 if (isRotate) {
-                    handler.postDelayed(rotateRunnable, TIME);
-//                    handler.postDelayed(rotateRunnable, 5000);
+//                    handler.postDelayed(rotateRunnable, TIME);
+                    handler.postDelayed(rotateRunnable, 3000);
                 }
             }
         };
@@ -412,26 +419,26 @@ public class FirstFragment extends Fragment{
     private void initNewsCursor(View view) {
         cursor = db.rawQuery("select * from " + DBOpenHelper.TBNAME_NEWS + " where "+
                 DBOpenHelper.TB_NEWS_ISTOP+"=1",null);
+        cursor_pic = db.rawQuery("select * from " + DBOpenHelper.TBNAME_NEWS_PIC +" where "+
+                DBOpenHelper.TB_PIC_ISTOP+"=1",null);
 
         NewsListEntity newsListEntity = new NewsListEntity();
-        initShnewsData(cursor,newsListEntity.getShnewsPage(),shnews_listView);
+        initShnewsData(cursor,newsListEntity.getShnewsPage().trim(),shnews_listView);
         initNoticeData(cursor,newsListEntity.getNoticePage(),notice_listView);
         initTeachingData(cursor,newsListEntity.getTeachingPage(),teaching_content_listView);
         initLearningData(cursor,newsListEntity.getLearningPage(),learning_content_listView);
         initHighData(cursor,newsListEntity.getHighPage(),high_content_listView);
         initHrData(cursor,newsListEntity.getHighPage(),hr_content_listView);
         initMediaData(cursor,newsListEntity.getMediaPage(),media_content_listView);
-        initSAUNewspaperData(cursor,newsListEntity.getSAUNewspaperPage(),SAUNewspaper_content_listView);
+        initSAUNewspaperData(cursor,cursor_pic,newsListEntity.getSAUNewspaperPage(),SAUNewspaper_content_listView);
         initVideoData(cursor,newsListEntity.getVideoPage(),video_content_listView);
-        initFigureData(cursor,newsListEntity.getFigurePage(),figure_content_listView);
+        initFigureData(cursor,cursor_pic,newsListEntity.getFigurePage(),figure_content_listView);
         initNewsData(cursor,newsListEntity.getNewsPage(),news_content_listView);
         initInternationalData(cursor,newsListEntity.getInternationalPage(),international_content_listView);
         initAlumnaData(cursor,newsListEntity.getAlumnaPage(),alumna_content_listView);
         initSchoolData(cursor,newsListEntity.getSchoolPage(),school_content_listView);
 
         initWebView();
-
-
 
     }
 
@@ -502,10 +509,11 @@ public class FirstFragment extends Fragment{
         });
     }
 
-    private void initFigureData(Cursor cursor, String figurePage, ListView figure_content_listView) {
-        final List<Map<String,String>> list = getListDate(cursor,figurePage);
-        SimpleAdapter adapter = new SimpleAdapter(view.getContext(),list,R.layout.list_style_simple_news,
-                new String[]{DBOpenHelper.TB_NEWS_TITLE},new int[]{R.id.id_simple_list_style_textView});
+    private void initFigureData(Cursor cursor, Cursor cursor_pic, String figurePage, ListView figure_content_listView) {
+        final List<Map<String,String>> list = getListDate(cursor, cursor_pic, figurePage);
+        SimpleAdapter adapter = new SimpleAdapter(view.getContext(),list,R.layout.list_style_news_with_pic,
+                new String[]{DBOpenHelper.TB_NEWS_TITLE,DBOpenHelper.TB_NEWS_DESCRIBE},
+                new int[]{R.id.id_with_pic_newsTitle,R.id.id_with_pic_newsDesc});
         figure_content_listView.setAdapter(adapter);
         figure_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -529,8 +537,9 @@ public class FirstFragment extends Fragment{
 
     }
 
-    private void initSAUNewspaperData(Cursor cursor, String sauNewspaperPage, ListView sauNewspaper_content_listView) {
+    private void initSAUNewspaperData(Cursor cursor, Cursor cursor_pic, String sauNewspaperPage, ListView sauNewspaper_content_listView) {
         final List<Map<String,String>> list = getListDate(cursor,sauNewspaperPage);
+        SAUNewspaper_content_webView.loadUrl(getPicURL(cursor_pic,list.get(0)));
         SimpleAdapter adapter = new SimpleAdapter(view.getContext(),list,R.layout.list_style_simple_news,
                 new String[]{DBOpenHelper.TB_NEWS_TITLE},new int[]{R.id.id_simple_list_style_textView});
         sauNewspaper_content_listView.setAdapter(adapter);
@@ -540,6 +549,17 @@ public class FirstFragment extends Fragment{
                 getNewsShown(list,view,position);
             }
         });
+    }
+
+    private String getPicURL(Cursor cursor_pic, Map<String, String> stringMap) {
+        String ret_URL = null;
+        while (cursor_pic.moveToNext()){
+            if (cursor_pic.getString(cursor_pic.getColumnIndex(DBOpenHelper.TB_PIC_FROM_URL))
+                    .equals(stringMap.get(DBOpenHelper.TB_NEWS_URL))){
+                ret_URL = cursor_pic.getString(cursor_pic.getColumnIndex(DBOpenHelper.TB_PIC_URL));
+            }
+        }
+        return ret_URL;
     }
 
     private void initMediaData(Cursor cursor, String mediaPage, ListView media_content_listView) {
@@ -611,6 +631,31 @@ public class FirstFragment extends Fragment{
 
     private void initNoticeData(Cursor cursor, String noticePage, ListView notice_listView) {
         final List<Map<String,String>> list = getListDate(cursor,noticePage);
+
+        Iterator<Map<String,String>> it = list.iterator();
+        Map<String,String> mySingleMap = new HashMap<>();
+        TextView tv_Title = (TextView) view.findViewById(R.id.id_common_notice_news_title);
+        TextView tv_Desc = (TextView) view.findViewById(R.id.id_common_notice_content);
+
+        while(it.hasNext()){
+            //如果新闻描述不为空
+            Map<String,String> map = it.next();
+            if (map.get(DBOpenHelper.TB_NEWS_DESCRIBE)!= null){
+                tv_Title.setText(map.get(DBOpenHelper.TB_NEWS_TITLE));
+                tv_Desc.setText(map.get(DBOpenHelper.TB_NEWS_DESCRIBE));
+                mySingleMap = map;
+                list.remove(map);
+            }
+        }
+        final Map<String, String> finalMySingleMap = mySingleMap;
+        tv_Desc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getNewsShown(finalMySingleMap,view);
+            }
+        });
+
+
         SimpleAdapter adapter = new SimpleAdapter(view.getContext(),list,R.layout.list_style_simple_news,
                 new String[]{DBOpenHelper.TB_NEWS_TITLE},new int[]{R.id.id_simple_list_style_textView});
         notice_listView.setAdapter(adapter);
@@ -625,51 +670,115 @@ public class FirstFragment extends Fragment{
     private void initShnewsData(Cursor cursor, String category, ListView listView) {
 
         final List<Map<String,String>> list = getListDate(cursor,category);
+
+        Map<String,String> mySingleMap = new HashMap<>();
+        TextView tv_Title = (TextView) view.findViewById(R.id.id_common_shnews_news_title);
+        TextView tv_Desc = (TextView) view.findViewById(R.id.id_common_shnews_content);
+
+        Iterator<Map<String,String>> it = list.iterator();
+        while(it.hasNext()){
+            //如果新闻描述不为空
+            Map<String,String> map = it.next();
+            if (map.get(DBOpenHelper.TB_NEWS_DESCRIBE)!= null){
+                tv_Title.setText(map.get(DBOpenHelper.TB_NEWS_TITLE));
+                tv_Desc.setText(map.get(DBOpenHelper.TB_NEWS_DESCRIBE));
+                mySingleMap = map;
+                list.remove(map);
+            }
+        }
+        final Map<String, String> finalMySingleMap = mySingleMap;
+        tv_Desc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getNewsShown(finalMySingleMap,view);
+            }
+        });
+
         SimpleAdapter adapter = new SimpleAdapter(view.getContext(),list,R.layout.list_style_simple_news,
                 new String[]{DBOpenHelper.TB_NEWS_TITLE},new int[]{R.id.id_simple_list_style_textView});
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                TextView tv_news_title = (TextView) view.findViewById(R.id.id_simple_list_style_textView);
-
                 getNewsShown(list,view,position);
-
             }
-
-
         });
+
+
     }
 
-    private void getNewsShown(List<Map<String, String>> list, View view, int position) {
-        Map<String,String> myMap = list.get(position);
-        String myUrl = myMap.get(DBOpenHelper.TB_NEWS_URL);
-        Intent intent = new Intent(view.getContext(), ContentActivityJS.class);
+    private void getNewsShown(Map<String,String> map,View view){
+        String myUrl = map.get(DBOpenHelper.TB_NEWS_URL);
+        Intent intent = new Intent(view.getContext(), ContentActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(DBOpenHelper.TB_NEWS_URL,myUrl);
         intent.putExtras(bundle);
         startActivity(intent);
     }
 
-    private List<Map<String, String>> getListDate(Cursor cursor, String category) {
+
+    private void getNewsShown(List<Map<String, String>> list, View view, int position) {
+        Map<String,String> myMap = list.get(position);
+        String myUrl = myMap.get(DBOpenHelper.TB_NEWS_URL);
+        Intent intent = new Intent(view.getContext(), ContentActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(DBOpenHelper.TB_NEWS_URL,myUrl);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+
+    private List<Map<String, String>> getListDate(Cursor cursor, Cursor cursor_pic, String category) {
         Log.i("dish_s",category);
         List<Map<String,String>> cache_list = new ArrayList<Map<String,String>>();
 
         while(cursor.moveToNext()){
-//            Log.i("dish_cate",cursor.getString(cursor.getColumnIndex(DBOpenHelper.TB_NEWS_CATEGORY)));
-//            Log.i("dish_sss",cursor.getString(cursor.getColumnIndex(DBOpenHelper.TB_NEWS_TITLE)));
-//            Log.i("dish_url",cursor.getString(cursor.getColumnIndex(DBOpenHelper.TB_NEWS_URL)));
-//            Log.i("dish_true2",String.valueOf(cursor.getString(
-//                    cursor.getColumnIndex(DBOpenHelper.TB_NEWS_CATEGORY)).trim().equals(category.trim())));
             if (cursor.getString(
                     cursor.getColumnIndex(DBOpenHelper.TB_NEWS_CATEGORY)).trim().equals(category.trim())) {
                 Map<String,String> cache_map = new HashMap<String,String>();
                 cache_map.put(DBOpenHelper.TB_NEWS_TITLE, cursor.getString(
                         cursor.getColumnIndex(DBOpenHelper.TB_NEWS_TITLE)));
-//                Log.i("dish_sif", "getListDate: "+cursor.getString(
-//                        cursor.getColumnIndex(DBOpenHelper.TB_NEWS_TITLE)));
                 cache_map.put(DBOpenHelper.TB_NEWS_URL,cursor.getString(
                         cursor.getColumnIndex(DBOpenHelper.TB_NEWS_URL)));
+                cache_map.put(DBOpenHelper.TB_NEWS_DESCRIBE,cursor.getString(
+                        cursor.getColumnIndex(DBOpenHelper.TB_NEWS_DESCRIBE)));
+//                cache_map.put(DBOpenHelper.TB_PIC_URL,newsListEntity.getBasePage()+getPictureURL(cursor_pic,cursor.getString(
+//                        cursor.getColumnIndex(DBOpenHelper.TB_NEWS_URL))));
+                cache_list.add(cache_map);
+            }
+        }
+        cursor.moveToFirst();
+
+        return cache_list;
+    }
+
+    //取图片表里，雨新闻对应的图片信息
+//    private String getPictureURL(Cursor cursor_pic, String news_URL) {
+//        String pic_url = null;
+//        while(cursor_pic.moveToNext()){
+//            String str = cursor_pic.getString(cursor_pic.getColumnIndex(DBOpenHelper.TB_PIC_FROM_URL)).trim();
+//            if (cursor_pic.getString(cursor_pic.getColumnIndex(DBOpenHelper.TB_PIC_FROM_URL)).trim()
+//                    .equals(news_URL)){
+//                pic_url = cursor_pic.getString(cursor_pic.getColumnIndex(DBOpenHelper.TB_PIC_URL));
+//            }
+//        }
+//        return pic_url;
+//    }
+
+    private List<Map<String, String>> getListDate(Cursor cursor, String category) {
+        Log.i("dish_s",category);
+        List<Map<String,String>> cache_list = new ArrayList<Map<String,String>>();
+
+        while(cursor.moveToNext()){
+            if (cursor.getString(
+                    cursor.getColumnIndex(DBOpenHelper.TB_NEWS_CATEGORY)).trim().equals(category.trim())) {
+                Map<String,String> cache_map = new HashMap<String,String>();
+                cache_map.put(DBOpenHelper.TB_NEWS_TITLE, cursor.getString(
+                        cursor.getColumnIndex(DBOpenHelper.TB_NEWS_TITLE)));
+                cache_map.put(DBOpenHelper.TB_NEWS_URL,cursor.getString(
+                        cursor.getColumnIndex(DBOpenHelper.TB_NEWS_URL)));
+                cache_map.put(DBOpenHelper.TB_NEWS_DESCRIBE,cursor.getString(
+                        cursor.getColumnIndex(DBOpenHelper.TB_NEWS_DESCRIBE)));
                 cache_list.add(cache_map);
             }
         }
