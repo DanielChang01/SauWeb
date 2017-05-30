@@ -296,7 +296,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		if (position > 0 || offset > 0) {
 			newScrollX -= scrollOffset;
 		}
-
+		//滑动到的位置
 		if (newScrollX != lastScrollX) {
 			lastScrollX = newScrollX;
 			scrollTo(newScrollX, 0);
@@ -355,11 +355,13 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		@Override
 		public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+			//当前view的位置
 			currentPosition = position;
+			//当前view滑动的距离
 			currentPositionOffset = positionOffset;
 
 			scrollToChild(position, (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()));
-
+			//重绘view
 			invalidate();
 
 			if (delegatePageListener != null) {
