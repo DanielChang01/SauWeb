@@ -28,7 +28,6 @@ public class NetAsyncTask extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
 
-
         String baseUrl = (String) params[0];
         Activity activity = (Activity) params[1];
         helper = new DBOpenHelper(activity);
@@ -52,24 +51,15 @@ public class NetAsyncTask extends AsyncTask {
         getNewsPic(doc,newsListEntity.getGetNewsPic());
         getADsPic(doc,newsListEntity.getGetAdLong());
 
-
-
         return null;
     }
 
     private void getNewsPic(Document doc, String getNewsPic) {
         Elements els = doc.select(getNewsPic);
         for (Element el : els) {
-//            if (el.select("img").size() > 1) {
-//                continue;
-//            }
-//            String erl = el.getElementsByTag("img").get(0).attr("src");
-//            String url = el.attributes().get("href");
             ContentValues cv = new ContentValues();
             cv.put(DBOpenHelper.TB_PIC_ISTOP,1);
-//            String str = el.attributes().get("href");
             cv.put(DBOpenHelper.TB_PIC_URL,el.getElementsByTag("img").get(0).attr("src"));
-//            cv.put(DBOpenHelper.TB_PIC_FROM_URL,el.attributes().get("href"));
             cv.put(DBOpenHelper.TB_PIC_FROM_URL,el.attributes().get("href"));
             db.insert(DBOpenHelper.TBNAME_NEWS_PIC,null,cv);
         }
@@ -128,7 +118,6 @@ public class NetAsyncTask extends AsyncTask {
             cv.put(DBOpenHelper.TB_NEWS_CATEGORY,getCategory(el.attributes().get("href")));
             cv.put(DBOpenHelper.TB_NEWS_ISTOP,1);
             db.insert(DBOpenHelper.TBNAME_NEWS,null,cv);
-
         }
     }
 
