@@ -1,9 +1,13 @@
 package com.danniel.danielchang.sauweb01.fragment;
 
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -26,7 +30,13 @@ import com.danniel.danielchang.sauweb01.R;
 import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
 import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
 import com.danniel.danielchang.sauweb01.entities.RotateBean;
+import com.danniel.danielchang.sauweb01.presenter.NetAsyncTask;
 import com.danniel.danielchang.sauweb01.presenter.RotateVpAdapter;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -162,6 +172,14 @@ public class FirstFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first,container,false);
 
+//        ProgressDialog pd = new ProgressDialog(getContext());
+//        pd.setTitle("提示信息");
+//        pd.setMessage("正在加载...");
+//        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        pd.setCancelable(false);
+//        pd.show();
+//        NewsListEntity netList = new NewsListEntity();
+//        new NetAsyncTask().execute(netList.getBasePage(),getContext(),pd,view);
 
         initView(view);
         initNewsCursor(view);
@@ -289,12 +307,12 @@ public class FirstFragment extends Fragment{
         }
         String[] str = sb.toString().split(";");
 
-        setImageFulfill(ad_long01_webView);
-        ad_long01_webView.loadUrl(newsListEntity.getBasePage()+str[0]);
-        setImageFulfill(ad_long02_webView);
-        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
-        setImageFulfill(ad_long03_webView);
-        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
+//        setImageFulfill(ad_long01_webView);
+//        ad_long01_webView.loadUrl(newsListEntity.getBasePage()+str[0]);
+//        setImageFulfill(ad_long02_webView);
+//        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
+//        setImageFulfill(ad_long03_webView);
+//        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
 
     }
 
@@ -459,12 +477,6 @@ public class FirstFragment extends Fragment{
         school_content_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Bundle bundle = new Bundle();
-//                bundle.putString("net_Url",list.get(position).get("net_Url"));
-//                bundle.putString("module_type",list.get(position).get("module_type"));
-//                Intent intent = new Intent(NewsList.this,NewsContent.class);
-//                intent.putExtras(bundle);
-//                startActivity(intent);
                 getNewsShown(list,view,position);
             }
         });
@@ -539,7 +551,8 @@ public class FirstFragment extends Fragment{
 
     private void initSAUNewspaperData(Cursor cursor, Cursor cursor_pic, String sauNewspaperPage, ListView sauNewspaper_content_listView) {
         final List<Map<String,String>> list = getListDate(cursor,sauNewspaperPage);
-        SAUNewspaper_content_webView.loadUrl(getPicURL(cursor_pic,list.get(0)));
+//        SAUNewspaper_content_webView.loadUrl(getPicURL(cursor_pic,list.get(0).get(DBOpenHelper.TB_NEWS_URL)));
+        SAUNewspaper_content_webView.loadUrl(getPicURL(cursor_pic,list));
         SimpleAdapter adapter = new SimpleAdapter(view.getContext(),list,R.layout.list_style_simple_news,
                 new String[]{DBOpenHelper.TB_NEWS_TITLE},new int[]{R.id.id_simple_list_style_textView});
         sauNewspaper_content_listView.setAdapter(adapter);
@@ -551,16 +564,47 @@ public class FirstFragment extends Fragment{
         });
     }
 
-    private String getPicURL(Cursor cursor_pic, Map<String, String> stringMap) {
+    private String getPicURL(Cursor cursor_pic, List<Map<String,String>> pic_list) {
+        if (pic_list==null){
+            cursor_pic = db.rawQuery("select * from " + DBOpenHelper.TBNAME_NEWS_PIC +" where "+
+                    DBOpenHelper.TB_PIC_ISTOP+"=1",null);
+            pic_list = getListDate(cursor,newsListEntity.getSAUNewspaperPage());
+        }
+        String stringDiv = null;
+        if (pic_list.size()>0){
+            stringDiv = pic_list.get(0).get(DBOpenHelper.TB_NEWS_URL);
+        } else {
+            return null;
+        }
         String ret_URL = null;
         while (cursor_pic.moveToNext()){
-            if (cursor_pic.getString(cursor_pic.getColumnIndex(DBOpenHelper.TB_PIC_FROM_URL))
-                    .equals(stringMap.get(DBOpenHelper.TB_NEWS_URL))){
+            if (cursor_pic.getString(cursor_pic.getColumnIndex(DBOpenHelper.TB_PIC_FROM_URL)).trim()
+                    .equals(stringDiv)){
                 ret_URL = cursor_pic.getString(cursor_pic.getColumnIndex(DBOpenHelper.TB_PIC_URL));
             }
         }
-        return ret_URL;
+        if (ret_URL != null){
+            return newsListEntity.getBasePage()+ret_URL;
+        } else {
+            return ret_URL;
+        }
     }
+
+//    private String getPicURL(Cursor cursor_pic, String stringMap) {
+//        String ret_URL = null;
+//        while (cursor_pic.moveToNext()){
+//            if (cursor_pic.getString(cursor_pic.getColumnIndex(DBOpenHelper.TB_PIC_FROM_URL)).trim()
+//                    .equals(stringMap)){
+//                ret_URL = cursor_pic.getString(cursor_pic.getColumnIndex(DBOpenHelper.TB_PIC_URL));
+//            }
+//        }
+//        if (ret_URL != null){
+//            return newsListEntity.getBasePage()+ret_URL;
+//        } else {
+//            return ret_URL;
+//        }
+//    }
+
 
     private void initMediaData(Cursor cursor, String mediaPage, ListView media_content_listView) {
         final List<Map<String,String>> list = getListDate(cursor,mediaPage);

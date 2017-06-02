@@ -21,8 +21,8 @@ public class WelcomePage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.first_page);
 
-        NewsListEntity netList = new NewsListEntity();
-        new NetAsyncTask().execute(netList.getBasePage(),WelcomePage.this);
+//        NewsListEntity netList = new NewsListEntity();
+//        new NetAsyncTask().execute(netList.getBasePage(),WelcomePage.this);
 
         final Intent intent = new Intent(this, MainActivity.class);
         Timer timer = new Timer();
@@ -33,6 +33,6 @@ public class WelcomePage extends Activity {
                 finish();
             }
         };
-        timer.schedule(task, 1000 * 4);
+        timer.schedule(task, 1000 * 3);
     }
 }

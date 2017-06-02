@@ -2,10 +2,15 @@ package com.danniel.danielchang.sauweb01.presenter;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
 import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
 
@@ -24,12 +29,16 @@ public class NetAsyncTask extends AsyncTask {
     private Document doc;
     DBOpenHelper helper;
     SQLiteDatabase db;
+    ProgressDialog pd;
+    Activity activity;
+
 
     @Override
     protected Object doInBackground(Object[] params) {
 
         String baseUrl = (String) params[0];
-        Activity activity = (Activity) params[1];
+        activity = (Activity) params[1];
+        pd = (ProgressDialog) params[2];
         helper = new DBOpenHelper(activity);
         db = helper.getWritableDatabase();
         NewsListEntity newsListEntity = new NewsListEntity();
@@ -37,7 +46,7 @@ public class NetAsyncTask extends AsyncTask {
         doc = jsoupconnect(baseUrl,360000);
 
         /**
-         * 读取首页信息，插入数据库
+         * 读取首页信息，并插入数据库
          */
         getNews_List_li(doc,newsListEntity.getGetList_li());   //".list li a"
         getNews_List_li(doc,newsListEntity.getGetIDlist_li_a()); //".iDlist li a"
@@ -48,10 +57,29 @@ public class NetAsyncTask extends AsyncTask {
         setUpdateNews(doc,newsListEntity.getGetUpdateFigure());  //".iFigure li a"
         setUpdateNews(doc,newsListEntity.getGetUpdateHeadline());//".info a"
 
-        getNewsPic(doc,newsListEntity.getGetNewsPic());
+        getNewsPic(doc,newsListEntity.getGetNewsPic()); //.pic a
         getADsPic(doc,newsListEntity.getGetAdLong());
 
         return null;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        Log.i("progress","onPreExecute");
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(Object o) {
+        Log.i("progress","onPostExecute");
+        super.onPostExecute(o);
+        pd.dismiss();
+    }
+
+    @Override
+    protected void onProgressUpdate(Object[] values) {
+        Log.i("progress","onProgressUpdate");
+        super.onProgressUpdate(values);
     }
 
     private void getNewsPic(Document doc, String getNewsPic) {
@@ -149,7 +177,7 @@ public class NetAsyncTask extends AsyncTask {
                 doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; rv:5.0)").timeout(timeout).get();
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("connect 获取失败啦,再重试" + retry + "次");
+                System.out.println("connect 获取失败,再重试" + retry + "次");
             }
         }
         return doc;

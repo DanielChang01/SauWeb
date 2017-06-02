@@ -58,10 +58,7 @@ public class LoadListView extends ListView implements AbsListView.OnScrollListen
                 isLoading = true;
                 footer.findViewById(R.id.id_list_bottom_progress_linear).setVisibility(View.VISIBLE);
                 iLoadListener.onLoad();
-
             }
-
-
         }
     }
 
