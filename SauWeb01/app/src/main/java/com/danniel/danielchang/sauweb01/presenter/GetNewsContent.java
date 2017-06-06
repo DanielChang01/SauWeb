@@ -1,7 +1,11 @@
 package com.danniel.danielchang.sauweb01.presenter;
 
+import android.app.Activity;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
+import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
 import com.danniel.danielchang.sauweb01.entities.NewsEntity;
 import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
 
@@ -23,6 +27,9 @@ public class GetNewsContent extends AsyncTask{
     String news_URL;
     NewsListEntity newsListEntity;
     NewsEntity newsEntity;
+    DBOpenHelper helper;
+    SQLiteDatabase db;
+    Activity activity;
 
 
     /**
@@ -37,9 +44,13 @@ public class GetNewsContent extends AsyncTask{
 
         news_Category = (String) params[0];
         news_URL = (String) params[1];
+        activity = (Activity) params[2];
 
         newsListEntity = new NewsListEntity();
         newsEntity = new NewsEntity();
+
+        helper = new DBOpenHelper(activity);
+        db = helper.getWritableDatabase();
 
         doc = jsoupconnect(news_URL,360000);
         getNewsHandled(doc,news_Category);
@@ -62,21 +73,32 @@ public class GetNewsContent extends AsyncTask{
         if (str_Category.trim().equals(newsListEntity.getVideoPage())){
             els_Content = doc.select(newsListEntity.getGetVideoContent());
             for (Element el : els_Content){
-                newsEntity.setNews_Part_One(newsListEntity.getBasePage()+el.attributes().get("src")+" " +
-                        "\n\n"+"提示：我们的视频需要强大的插件，请移至强大的PC端观看！！");
+//                newsEntity.setNews_Part_One(newsListEntity.getBasePage()+el.attributes().get("src")+" " +
+//                        "\n\n"+"提示：我们的视频需要强大的插件，请移至强大的PC端观看！！");
+                newsEntity.setNews_Part_One("\n\n"+"提示：我们的视频需要强大的插件，请移至强大的PC端观看！！");
             }
         } else if (str_Category.trim().equals(newsListEntity.getSAUNewspaperPage())){
+            newsEntity.setNews_Part_One("提示：无法加载插件！请点击链接下载观看！");
             els_Content = doc.select(newsListEntity.getGetNewsPaperContent());
             for (Element el : els_Content){
-                newsEntity.setNews_Part_One(newsListEntity.getBasePage()+el.attributes().get("href"));
+                newsEntity.setNews_Part_One(newsEntity.getNews_Part_One()+"\n\n"+newsListEntity.getBasePage()+el.attributes().get("href"));
             }
-        }
-
-        else {
+        } else {
             els_Content = doc.select(newsListEntity.getNewsRealContent());
             for (Element el : els_Content){
                 newsEntity.setNews_Part_One(handleContent(el.text()));
             }
+        }
+        Elements els_Pics = doc.select(newsListEntity.getGetNewsCommonPic());
+        if (els_Pics.size()>0){
+            for (Element el : els_Pics){
+                ContentValues cv = new ContentValues();
+                cv.put(DBOpenHelper.TB_PIC_FROM_URL,news_Category);
+                //String str = el.attributes().get("src");
+                cv.put(DBOpenHelper.TB_PIC_URL,el.attributes().get("src"));
+                db.insert(DBOpenHelper.TBNAME_NEWS_PIC,null,cv);
+            }
+
         }
     }
 

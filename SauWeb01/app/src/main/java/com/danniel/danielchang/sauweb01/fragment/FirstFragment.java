@@ -30,13 +30,7 @@ import com.danniel.danielchang.sauweb01.R;
 import com.danniel.danielchang.sauweb01.database.DBOpenHelper;
 import com.danniel.danielchang.sauweb01.entities.NewsListEntity;
 import com.danniel.danielchang.sauweb01.entities.RotateBean;
-import com.danniel.danielchang.sauweb01.presenter.NetAsyncTask;
 import com.danniel.danielchang.sauweb01.presenter.RotateVpAdapter;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -172,15 +166,6 @@ public class FirstFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first,container,false);
 
-//        ProgressDialog pd = new ProgressDialog(getContext());
-//        pd.setTitle("提示信息");
-//        pd.setMessage("正在加载...");
-//        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        pd.setCancelable(false);
-//        pd.show();
-//        NewsListEntity netList = new NewsListEntity();
-//        new NetAsyncTask().execute(netList.getBasePage(),getContext(),pd,view);
-
         initView(view);
         initNewsCursor(view);
         initBanner(view);
@@ -307,12 +292,12 @@ public class FirstFragment extends Fragment{
         }
         String[] str = sb.toString().split(";");
 
-//        setImageFulfill(ad_long01_webView);
-//        ad_long01_webView.loadUrl(newsListEntity.getBasePage()+str[0]);
-//        setImageFulfill(ad_long02_webView);
-//        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
-//        setImageFulfill(ad_long03_webView);
-//        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
+        setImageFulfill(ad_long01_webView);
+        ad_long01_webView.loadUrl(newsListEntity.getBasePage()+str[0]);
+        setImageFulfill(ad_long02_webView);
+        ad_long02_webView.loadUrl(newsListEntity.getBasePage()+str[1]);
+        setImageFulfill(ad_long03_webView);
+        ad_long03_webView.loadUrl(newsListEntity.getBasePage()+str[2]);
 
     }
 

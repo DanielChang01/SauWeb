@@ -62,7 +62,7 @@ public class RotateVpAdapter extends PagerAdapter {
 //        ImageView imageView = (ImageView) convertView.findViewById(R.id.item_iv);
         WebView imageView = (WebView) convertView.findViewById(R.id.item_iv);
         TextView textView = (TextView) convertView.findViewById(R.id.item_tv);
-        textView.setText("文字内容" + newPosition);
+//        textView.setText("文字内容" + newPosition);
 //        imageView.setImageResource(datas.get(newPosition).getImgId());
 //        Log.i("dish_id",String.valueOf(datas.get(newPosition).getImgId()));
         Log.i("dish_url",datas.get(newPosition).getImgUrl());

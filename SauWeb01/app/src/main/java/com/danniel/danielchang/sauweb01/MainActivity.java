@@ -104,7 +104,7 @@ public class MainActivity extends FragmentActivity {
                 handler.sendEmptyMessage(1);
             }
         }).start();
-//        pd.dismiss();
+
 
 
     }

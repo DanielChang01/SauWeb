@@ -109,12 +109,13 @@ public class NewsListEntity {
      */
     private String getCommonNewsList = ".NewList li a";
     /**
-     * 普通新闻页的椰页数加载
+     * 普通新闻页的页数加载
      */
     private String getPageList = ".pagelist li";
 
     private String getNewsPic = ".pic a";
     private String getAdLong = ".ad_long img";
+    private String getNewsCommonPic = ".content img";
 
     public String getGetList_li() {
         return getList_li;
@@ -282,6 +283,10 @@ public class NewsListEntity {
 
     public String getGetNewsPaperContent() {
         return getNewsPaperContent;
+    }
+
+    public String getGetNewsCommonPic() {
+        return getNewsCommonPic;
     }
 }
 
