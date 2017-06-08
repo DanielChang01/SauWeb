@@ -732,8 +732,6 @@ public class FirstFragment extends Fragment{
                 getNewsShown(list,view,position);
             }
         });
-
-
     }
 
     private void getNewsShown(Map<String,String> map,View view){

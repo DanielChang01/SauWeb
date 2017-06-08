@@ -75,7 +75,7 @@ public class GetNewsContent extends AsyncTask{
             for (Element el : els_Content){
 //                newsEntity.setNews_Part_One(newsListEntity.getBasePage()+el.attributes().get("src")+" " +
 //                        "\n\n"+"提示：我们的视频需要强大的插件，请移至强大的PC端观看！！");
-                newsEntity.setNews_Part_One("\n\n"+"提示：我们的视频需要强大的插件，请移至强大的PC端观看！！");
+                newsEntity.setNews_Part_One("\n\n"+"提示：视频无法播放，请移至PC端观看！！");
             }
         } else if (str_Category.trim().equals(newsListEntity.getSAUNewspaperPage())){
             newsEntity.setNews_Part_One("提示：无法加载插件！请点击链接下载观看！");

@@ -158,9 +158,13 @@ public class ContentActivity extends Activity {
                 myViewPager.setVisibility(View.GONE);
             }
             myContent.setText(newsEntity.getNews_Part_One());
+            myContent.setAutoLinkMask(Linkify.WEB_URLS);
+            myContent.setMovementMethod(LinkMovementMethod.getInstance());
         } else {
             myViewPager.setVisibility(View.GONE);
             myContent.setText(newsEntity.getNews_Part_One());
+            myContent.setAutoLinkMask(Linkify.WEB_URLS);
+            myContent.setMovementMethod(LinkMovementMethod.getInstance());
         }
     }
 
