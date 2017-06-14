@@ -34,13 +34,17 @@ public class NewsListEntity {
     private String newsTitleNote = ".note"; //新闻信息栏
     private String newsRealContent = ".content"; //新闻内容
 
+    private int count_Down = 3000;
+
     /**
      * 导航栏图标
      */
-    private String banner_Pic1 = "http://news.sau.edu.cn/uploads/userup/2015/a.jpg";
-    private String banner_Pic2 = "http://news.sau.edu.cn/uploads/userup/2015/b.jpg";
-    private String banner_Pic3 = "http://news.sau.edu.cn/uploads/userup/2015/c.jpg";
-    private String banner_Pic4 = "http://news.sau.edu.cn/uploads/userup/2015/d.jpg";
+    private String banner_Pic1 = "http://news.sau.edu.cn/uploads/userup/2015/b.jpg";
+    private String banner_Pic2 = "http://news.sau.edu.cn/uploads/allimg/160601/1-1606011I25J28.jpg";
+    private String banner_Pic3 = "http://news.sau.edu.cn/uploads/allimg/150618/1-15061QUTS09.jpg";
+    private String banner_Pic4 = "http://news.sau.edu.cn/uploads/allimg/160606/1-16060610092TH.jpg";
+    private String banner_Pic5 = "http://news.sau.edu.cn/uploads/allimg/170513/1-1F5131944164a.jpg";
+    private String banner_Pic6 = "http://news.sau.edu.cn/uploads/allimg/161230/1-161230224G61V.jpg";
     /**
      * 新闻栏目图标
      */
@@ -241,6 +245,14 @@ public class NewsListEntity {
         return banner_Pic2;
     }
 
+    public String getBanner_Pic5() {
+        return banner_Pic5;
+    }
+
+    public String getBanner_Pic6() {
+        return banner_Pic6;
+    }
+
     public String getHr_note_pic() {
         return hr_note_pic;
     }
@@ -287,6 +299,10 @@ public class NewsListEntity {
 
     public String getGetNewsCommonPic() {
         return getNewsCommonPic;
+    }
+
+    public int getCount_Down() {
+        return count_Down;
     }
 }
 

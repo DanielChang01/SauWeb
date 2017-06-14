@@ -72,6 +72,7 @@ public class GetNewsList {
                 SimpleAdapter adapter = new SimpleAdapter(view.getContext(),myList
                         , R.layout.list_style_simple_news_for_common,new String[]{DBOpenHelper.TB_NEWS_TITLE}
                         ,new int[]{R.id.id_simple_list_style_textView_for_common});
+                listView.setSelection(adapter.getCount()-3);
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

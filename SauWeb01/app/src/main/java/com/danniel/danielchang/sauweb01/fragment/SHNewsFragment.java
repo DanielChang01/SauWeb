@@ -12,6 +12,9 @@ import com.danniel.danielchang.sauweb01.presenter.GetNewsList;
 import com.danniel.danielchang.sauweb01.presenter.LoadListView;
 import com.danniel.danielchang.sauweb01.presenter.NetAsyncTaskForRefresh;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 沈航要闻
  * 创建人：daniel
@@ -48,17 +51,18 @@ public class SHNewsFragment extends Fragment implements LoadListView.ILoadListen
         new NetAsyncTaskForRefresh().execute(net_url,baseNum++,news_category,getContext());
 
         Handler handler = new Handler();
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
                 //更新listView
 //        showListView();
-        new GetNewsList(view,net_url,news_category,listView);
+                new GetNewsList(view,net_url,news_category,listView);
                 //通知listView加载完毕
-        listView.loadComplete();
+                listView.loadComplete();
             }
-        },2000);
+        },3000);
     }
 
 }

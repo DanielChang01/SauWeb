@@ -417,6 +417,8 @@ public class FirstFragment extends Fragment{
         datas.add(new RotateBean(newsListEntity.getBanner_Pic2()));
         datas.add(new RotateBean(newsListEntity.getBanner_Pic3()));
         datas.add(new RotateBean(newsListEntity.getBanner_Pic4()));
+        datas.add(new RotateBean(newsListEntity.getBanner_Pic5()));
+        datas.add(new RotateBean(newsListEntity.getBanner_Pic6()));
     }
 
     private void initNewsCursor(View view) {

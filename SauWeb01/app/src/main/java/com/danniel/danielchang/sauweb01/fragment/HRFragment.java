@@ -13,6 +13,9 @@ import com.danniel.danielchang.sauweb01.presenter.GetNewsList;
 import com.danniel.danielchang.sauweb01.presenter.LoadListView;
 import com.danniel.danielchang.sauweb01.presenter.NetAsyncTaskForRefresh;
 
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * 招生就业
@@ -45,6 +48,7 @@ public class HRFragment extends Fragment implements LoadListView.ILoadListener{
         new NetAsyncTaskForRefresh().execute(net_url,baseNum++,news_category,getContext());
 
         Handler handler = new Handler();
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -55,7 +59,7 @@ public class HRFragment extends Fragment implements LoadListView.ILoadListener{
                 //通知listView加载完毕
                 listView.loadComplete();
             }
-        },2000);
+        },3000);
     }
 
 }

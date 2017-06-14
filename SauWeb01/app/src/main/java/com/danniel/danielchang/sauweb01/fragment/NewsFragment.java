@@ -14,6 +14,9 @@ import com.danniel.danielchang.sauweb01.presenter.GetNewsList;
 import com.danniel.danielchang.sauweb01.presenter.LoadListView;
 import com.danniel.danielchang.sauweb01.presenter.NetAsyncTaskForRefresh;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 新闻动态
  * 创建人：daniel
@@ -40,21 +43,28 @@ public class NewsFragment extends Fragment implements LoadListView.ILoadListener
     @Override
     public void onLoad() {
 
+        List<Map<String,String>> flag = null;
         //获取更多数据
-        new NetAsyncTaskForRefresh().execute(net_url,baseNum++,news_category,getContext());
+        flag = (List<Map<String,String>>) new NetAsyncTaskForRefresh().execute(net_url,baseNum++,news_category,getContext());
 
         Handler handler = new Handler();
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
                 //更新listView
 //        showListView();
-                new GetNewsList(view,net_url,news_category,listView);
-                //通知listView加载完毕
-                listView.loadComplete();
+//                new GetNewsList(view,net_url,news_category,listView);
+//                //通知listView加载完毕
+//                listView.loadComplete();
             }
-        },2000);
+        },3000);
+        if (flag.size()>0){
+            new GetNewsList(view,net_url,news_category,listView);
+            //通知listView加载完毕
+            listView.loadComplete();
+        }
     }
 
 }

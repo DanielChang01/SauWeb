@@ -50,7 +50,7 @@ public class NetAsyncTaskForRefresh extends AsyncTask {
 
         getNews_List(doc,newsEntity.getGetCommonNewsList());
 
-        return myList;
+        return null;
     }
 
     private void getNews_List(Document doc, String getList) {
